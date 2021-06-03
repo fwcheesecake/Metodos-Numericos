@@ -102,9 +102,9 @@ public class Interpolacion {
     }
 
     private static double twoPoint(double x) {
-        int aux = (int) (x * 100.0);
+        int aux = (int) (x * 1000.0);
         double aux1 = aux;
-        return  aux1 / 100.0;
+        return  aux1 / 1000.0;
     }
 
     private static double f(double X, int i, int j) {

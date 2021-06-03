@@ -14,7 +14,9 @@ public class Biseccion {
 
         double errorP = Double.MAX_VALUE;
 
-        for(int i = 1; i <= 10 && errorP >= 0.1; i++) {
+        separator();
+
+        for(int i = 1; i <= 10 && errorP >= 1; i++) {
             xrac = twoPoint(next(a, b));
 
             double fxr = twoPoint(f(xrac));
@@ -33,33 +35,71 @@ public class Biseccion {
                 return;
             }
 
-            System.out.println("i: " + i);
-            System.out.println("a: " + a);
-            System.out.println("Xr: " + xrac);
-            System.out.println("b: " + b);
-            System.out.println("Error: " + errorP);
-            System.out.println("--------------------------");
+            separator();
 
             xran = xrac;
         }
     }
 
     private static double twoPoint(double x) {
-        int aux = (int) (x * 100.0);
+        int aux = (int) (x * 1000.0);
         double aux1 = aux;
-        return  aux1 / 100.0;
+        return  aux1 / 1000.0;
     }
 
     private static double f(double x) {
-        //return Math.exp(0.0 - x) - x;
-        return (-0.5 * x * x) + (2.5 * x) + 4.5;
+        double ret = Math.exp(-x) - Math.log(x);
+        System.out.println("f(" + x + ") = e^-" + x + " - Ln(" + x + ") = " + twoPoint(ret));
+        return ret;
     }
 
     private static double error(double xr_ac, double xr_an) {
-        return Math.abs((xr_ac - xr_an) / xr_ac * 100.0);
+        double ret = Math.abs((xr_ac - xr_an) / xr_ac * 100.0);
+
+        String l1 = xr_ac + " - " + xr_an;
+        String l2 = "Ep = ";
+        String l3 = String.valueOf(xr_ac);
+
+        for(int i = 0; i < l2.length() + 1; i++)
+            System.out.print(" ");
+
+        int divisionLen = l1.length() + 2;
+        for(int i = 0; i < divisionLen; i++)
+            l2 += "-";
+
+        System.out.println(l1);
+        System.out.println(l2 + " = " + twoPoint(ret) + "%");
+        for(int i = 0; i < (divisionLen - l3.length()) / 2 + 5; i++)
+            System.out.print(" ");
+        System.out.println(l3);
+
+        return ret;
     }
 
     private static double next(double xr_ac, double xr_an) {
-        return (xr_ac + xr_an) / 2.0;
+        double ret = (xr_ac + xr_an) / 2.0;
+
+        String l1 = xr_ac + " + " + xr_an;
+        String l2 = "xr = ";
+        String l3 = "2.0";
+
+        for(int i = 0; i < l2.length() + 1; i++)
+            System.out.print(" ");
+
+        int divisionLen = l1.length() + 2;
+        for(int i = 0; i < divisionLen; i++)
+            l2 += "-";
+
+        System.out.println(l1);
+        System.out.println(l2 + " = " + twoPoint(ret));
+        for(int i = 0; i < (divisionLen - 3) / 2 + 5; i++)
+            System.out.print(" ");
+        System.out.println(l3);
+
+        return ret;
+    }
+
+    private static void separator() {
+        System.out.println("===================================================");
     }
 }
